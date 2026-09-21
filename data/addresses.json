@@ -1,9 +1,13 @@
 [
     {
-        "firstName": "Anuradha",
-        "lastName": "Agarwal",
+        "firstName": "Nanda",
+        "lastName": "Kishore Namburi",
         "street": "123 Test Street",
-        "city": "Dubai",
-        "country": "AE"
+        "city": "Gurugram",
+        "state": "Haryana",
+        "pinCode": "122001",
+        "country": "India",
+        "phone": "9876543210",
+        "email": "namburinanda@gmail.com"
     }
 ]

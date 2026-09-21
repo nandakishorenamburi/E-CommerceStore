@@ -1,0 +1,9 @@
+export { DemoShopPage } from './DemoShopPage';
+export { CartPage } from './CartPage';
+export { CheckoutPage } from './CheckoutPage';
+export { MyAccountPage } from './MyAccountPage';
+export { LoginPage } from './Loginpage';
+export { AddressPage } from './AddressPage';
+export { ProductPage } from './ProductPage';
+export { ShopPage } from './Shoppage';
+export { OrderPage } from './OrderPage';

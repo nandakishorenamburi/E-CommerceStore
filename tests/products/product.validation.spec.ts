@@ -11,60 +11,48 @@ const product = products[0];
 // Test: View Product Details in New Tab
 // ─────────────────────────────────────────────
 test.describe('Products — product detail new tab @products', () => {
-test('registered user views product details in new tab @regression', async ({ loggedInPage:page }) => {
+  test('registered user views product details in new tab @regression', async ({ loggedInPage: page }, testInfo) => {
+    testInfo.annotations.push(
+      { type: 'product', description: JSON.stringify({
+        name: product.name,
+        category: product.category,
+        expectedUrl: product.expectedUrl,
+        priority: product.priority,
+        tags: product.tags,
+      }) },
+      { type: 'priority', description: product.priority },
+      { type: 'category', description: product.category }
+    );
 
     // Step 1: Navigate to DemoShop page
     await test.step('Navigate to DemoShop', async () => {
-
-        page.goto('/demoshop')
-
-        // await page.getByRole('link', {
-        //     name: 'DemoShop'
-        // }).click();
-
-        // Verify user reaches Shop page
-        await expect(page).toHaveURL(/shop/);
+      await page.goto('/demoshop');
+      await expect(page).toHaveURL(/shop/);
     });
-
-    // page.context().waitForEvent('page')
 
     // Step 2: Open product in a new tab and validate details
     await test.step('Open product details and validate', async () => {
+      const productLink = page
+        .getByRole('link', { name: product.name })
+        .first();
 
-        // Locate the product link
-        const productLink = page
-            .getByRole('link', { name: product.name })
-            .first();
+      await expect(productLink).toHaveAttribute('target', '_blank');
 
-        // Verify the link is configured to open in a new tab
-        await expect(productLink).toHaveAttribute('target', '_blank');
+      const [productTab] = await Promise.all([
+        page.context().waitForEvent('page'),
+        productLink.click(),
+      ]);
 
-        // Listen for the new page event BEFORE clicking the link
-        // Promise.all prevents a race condition where the tab opens
-        // before Playwright starts listening for it.
-        const [productTab] = await Promise.all([
-            page.context().waitForEvent('page'),
-            productLink.click()
-        ]);
+      await productTab.waitForLoadState();
 
-        // console.log(productTab)
+      await expect(
+        productTab.getByRole('heading', {
+          name: product.name,
+        })
+      ).toBeVisible();
 
-        // Wait until the new page finishes loading
-        await productTab.waitForLoadState();
-
-        // Verify product heading is displayed
-        await expect(
-            productTab.getByRole('heading', {
-                name: product.name
-            })
-        ).toBeVisible();
-
-        // Verify correct product page URL
-        await expect(productTab)
-            .toHaveURL(new RegExp(product.expectedUrl));
-
-        // Close the product tab
-        await productTab.close();
+      await expect(productTab).toHaveURL(new RegExp(product.expectedUrl));
+      await productTab.close();
     });
-})
-})
+  });
+});

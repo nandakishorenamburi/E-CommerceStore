@@ -1,6 +1,9 @@
 [
     {
         "name": "Assorted Coffee",
-        "expectedUrl": "assorted-coffee"
+        "expectedUrl": "assorted-coffee",
+        "category": "Coffee",
+        "priority": "P1",
+        "tags": ["featured", "new-arrival"]
     }
 ]

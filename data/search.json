@@ -1,10 +1,14 @@
 [
     {
         "keyword": "organic",
-        "maxPrice": "$25"
+        "maxPrice": "$25",
+        "productCategory": "Organic",
+        "priority": "P1"
     },
     {
         "keyword": "fresh",
-        "maxPrice": "$34"
+        "maxPrice": "$34",
+        "productCategory": "Fresh",
+        "priority": "P2"
     }
 ]
