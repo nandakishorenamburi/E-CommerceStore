@@ -84,7 +84,6 @@ export class CheckoutPage {
       path: filePath,
       fullPage: true
     });
-  
   }
 
 }
