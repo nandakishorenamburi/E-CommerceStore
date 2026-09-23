@@ -5,6 +5,14 @@ on:
   pull_request:
     branches: [ main, master ]
 
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Test tags to run (eg: @smoke, @regression)'
+        required: false
+        default: '@Smoke'
+        
+
 jobs:
   test:
     timeout-minutes: 60
@@ -37,7 +45,7 @@ jobs:
           java-version: '17'
 
       - name: Run Playwright tests
-        run: npx playwright test --grep @smoke
+        run: npx playwright test --grep "${{github.event.inputs.tags || '@smoke'}}"
       
 
       - name: Upload Playwright Report
