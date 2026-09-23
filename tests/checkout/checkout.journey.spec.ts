@@ -62,7 +62,10 @@ test.describe('Checkout — registered user purchase journey @checkout @journey'
             email: billingEmail
           });
           orderId = await checkoutPage.placeOrder();
-          await test.info().attach('OrderID', { body: orderId ?? '' });
+          await test.info().annotations.push({ type: 'Order ID', description: String(orderId ?? '') });
+          await test.info().annotations.push({ type: 'Billing email', description: billingEmail });
+          await test.info().attach('Order ID', { body: String(orderId ?? ''), contentType: 'text/plain' });
+          await test.info().attach('Billing email', { body: billingEmail, contentType: 'text/plain' });
         });
 
         // ──────────────────────────────────────────

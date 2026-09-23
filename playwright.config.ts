@@ -9,6 +9,7 @@ if (!process.env.DEMO_PASS) throw new Error('DEMO_PASS is not set in .env');
 if(!process.env.API_BASE_URL) throw new Error('API_BASE_URL is not set in .env');
 
 export default defineConfig({
+  workers: process.env.CI ? 1 : undefined,
   timeout: 40 * 1000,
   expect: { timeout: 40 * 1000 },
   globalTeardown:'./global-teardown.ts',
@@ -18,7 +19,7 @@ export default defineConfig({
   use: {
     baseURL: process.env.BASE_URL,
     headless: true,
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
   },
   projects: [
     {

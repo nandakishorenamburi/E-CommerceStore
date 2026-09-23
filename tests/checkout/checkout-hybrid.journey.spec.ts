@@ -37,6 +37,8 @@ test.describe('Checkout — UI purchase with API verification @checkout @journey
       expect(orderIdFromPage, 'Order ID should be captured from the checkout flow').toBeTruthy();
       test.info().annotations.push({ type: 'Order ID', description: String(orderIdFromPage) });
       test.info().annotations.push({ type: 'Billing email', description: billingEmail });
+      await test.info().attach('Order ID', { body: String(orderIdFromPage), contentType: 'text/plain' });
+      await test.info().attach('Billing email', { body: billingEmail, contentType: 'text/plain' });
     });
 
     await test.step('Verify the created order in WooCommerce API', async () => {
