@@ -17,25 +17,25 @@ export default defineConfig({
   ],
   use: {
     baseURL: process.env.BASE_URL,
-    headless: false,
+    headless: true,
     trace: 'on-first-retry',
   },
   projects: [
-    // {
-    //   name: 'setup',
-    //   testDir: './helpers',
-    //   testMatch: 'auth.setup.ts',
-    //   use: {
-    //     browserName: 'chromium',
-    //     headless: false,
-    //   },
-    // },
+    {
+      name: 'setup',
+      testDir: './helpers',
+      testMatch: 'auth.setup.ts',
+      use: {
+        browserName: 'chromium',
+        headless: true,
+      },
+    },
     {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
       },
-      //dependencies: ['setup'],
+      dependencies: ['setup'],
     },
   ],
 });
