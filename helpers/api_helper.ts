@@ -1,6 +1,6 @@
 import { request } from '@playwright/test';
 
-export async function createAPIContext() {
+export async function CreateAPIContext() {
     return await request.newContext({
         baseURL: process.env.API_BASE_URL,
     });

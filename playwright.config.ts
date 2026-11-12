@@ -22,21 +22,21 @@ export default defineConfig({
     trace: process.env.CI ? 'on-first-retry' : undefined,
   },
   projects: [
-    {
-      name: 'setup',
-      testDir: './helpers',
-      testMatch: 'auth.setup.ts',
-      use: {
-        browserName: 'chromium',
-        headless: true,
-      },
-    },
+    // {
+    //   name: 'setup',
+    //   testDir: './helpers',
+    //   testMatch: 'auth.setup.ts',
+    //   use: {
+    //     browserName: 'chromium',
+    //     headless: true,
+    //   },
+    //},
     {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
       },
-      dependencies: ['setup'],
+     // dependencies: ['setup'],
     },
   ],
 });

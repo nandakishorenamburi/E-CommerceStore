@@ -19,10 +19,10 @@ test('GET product list from a store', async ({request}) => {
 })
 test('GET a Single product by id', async ({request}) => {
 
-    const response = await request.get('https://qa-cart.com/wp-json/wc/store/products/3682');
+    const response = await request.get('https://qa-cart.com/wp-json/wc/store/products/3681');
     expect(response.status()).toBe(200);
 
     const product = await response.json();
-    expect(product).toHaveProperty('id', 3682);
+    expect(product).toHaveProperty('id', 3681);
     expect(product).toHaveProperty('name');
 });
