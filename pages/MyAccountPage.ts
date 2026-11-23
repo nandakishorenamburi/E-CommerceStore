@@ -24,12 +24,15 @@ export class MyAccountPage {
   async openOrders() {
     await expect(this.myAccountLink).toBeVisible();
     await this.myAccountLink.click();
-    await this.page.waitForLoadState('domcontentloaded');
+    await expect(
+      this.page.getByRole('heading', { name: 'My account', level: 1 })
+    ).toBeVisible();
 
     await expect(this.ordersLink).toBeVisible();
-    await this.ordersLink.click();
-    await this.page.waitForURL(/orders/);
-    await this.page.waitForLoadState('domcontentloaded');
+    await Promise.all([
+      this.page.waitForURL(/orders/, { timeout: 20_000 }),
+      this.ordersLink.click()
+    ]);
   }
 
   async verifyOrderInHistory(orderId: string | undefined) {
@@ -42,11 +45,10 @@ export class MyAccountPage {
 
     await expect(viewOrderLink).toBeVisible();
     await Promise.all([
-      this.page.waitForURL(/view-order/),
+      this.page.waitForURL(/view-order/, { timeout: 20_000 }),
       viewOrderLink.click()
     ]);
 
-    await this.page.waitForLoadState('domcontentloaded');
     await expect(this.page.getByRole('heading', { name: new RegExp(`Order #${orderId}`, 'i') })).toBeVisible();
   }
 }

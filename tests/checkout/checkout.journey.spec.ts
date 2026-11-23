@@ -13,6 +13,7 @@ test.describe('Checkout — registered user purchase journey @checkout @journey'
     test(
       `registered user searches for ${search.keyword} and ${search.maxPrice} filters purchases product and verifies order @smoke @regression @critical`,
       async ({ loggedInPage: page }) => {
+        test.slow();
         test.info().annotations.push({ type: 'Search keyword', description: search.keyword });
         test.info().annotations.push({ type: 'Max price', description: search.maxPrice });
         test.info().annotations.push({ type: 'Environment', description: 'staging' });

@@ -1,11 +1,13 @@
 import { test as setup, expect } from '@playwright/test'
 import path from 'path';
+import fs from 'fs';
 
 
 // ─────────────────────────────────────────────
 // Auth state output path
 // ─────────────────────────────────────────────
 const authFile = path.join(__dirname, '..', 'auth', 'storageState.json');
+fs.mkdirSync(path.dirname(authFile), { recursive: true });
 
 //Login Credentials
 

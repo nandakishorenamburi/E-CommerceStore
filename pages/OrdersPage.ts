@@ -32,13 +32,17 @@ export class OrdersPage {
     const myAccountLink = this.page.getByRole('link', { name: /my account/i }).first();
     await expect(myAccountLink).toBeVisible();
     await myAccountLink.click();
-    await this.page.waitForLoadState('domcontentloaded');
+    await expect(
+      this.page.getByRole('heading', { name: 'My account', level: 1 })
+    ).toBeVisible();
 
     const ordersLink = this.page.getByRole('link', { name: /^orders$/i }).first();
     await expect(ordersLink).toBeVisible();
-    await ordersLink.click();
-    await this.page.waitForURL(/orders/);
-    await this.page.waitForLoadState('domcontentloaded');
+    await Promise.all([
+      this.page.waitForURL(/orders/, { timeout: 20_000 }),
+      ordersLink.click()
+    ]);
+    await expect(this.ordersTable).toBeVisible();
   }
 
   async verifyOrderVisibleInHistory(orderId: string | undefined) {
@@ -51,11 +55,10 @@ export class OrdersPage {
 
     await expect(viewOrderLink).toBeVisible();
     await Promise.all([
-      this.page.waitForURL(/view-order/),
+      this.page.waitForURL(/view-order/, { timeout: 20_000 }),
       viewOrderLink.click()
     ]);
 
-    await this.page.waitForLoadState('domcontentloaded');
     await expect(this.page.getByRole('heading', { name: new RegExp(`Order #${orderId}`, 'i') })).toBeVisible();
   }
 }
