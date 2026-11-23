@@ -17,7 +17,7 @@ test.describe('Checkout — UI purchase with API verification @checkout @journey
 
     await test.step('Add item to cart and proceed to checkout', async () => {
       await shopPage.addFirstProductToCart();
-      await checkoutPage.goToCheckout();
+      await checkoutPage.goToCheckout(); 
     });
 
     await test.step('Fill billing details and place the order', async () => {
