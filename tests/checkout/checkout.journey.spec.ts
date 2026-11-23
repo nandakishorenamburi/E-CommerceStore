@@ -2,7 +2,7 @@ import { test } from '../../fixtures/baseFixtures';
 import searchData from '../../data/search.json';
 import { ProductPage } from '../../pages/ProductPage';
 import { CheckoutPage } from '../../pages/CheckoutPage';
-import { OrderPage } from '../../pages/OrderPage';
+import { OrdersPage } from '../../pages/OrdersPage';
 
 // ======================================================
 // Checkout Journey — Registered User Purchase Flow
@@ -23,7 +23,7 @@ test.describe('Checkout — registered user purchase journey @checkout @journey'
 
         const shopPage = new ProductPage(page);
         const checkoutPage = new CheckoutPage(page);
-        const orderPage = new OrderPage(page);
+        const orderPage = new OrdersPage(page);
 
         // ── Step 1: Open DemoShop ─────────────
         await test.step('Open DemoShop page', async () => {

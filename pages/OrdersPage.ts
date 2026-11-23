@@ -1,6 +1,6 @@
 import { expect, Page } from '@playwright/test';
 
-export class OrderPage {
+export class OrdersPage {
   constructor(private readonly page: Page) {}
 
   get orderConfirmationText() {
